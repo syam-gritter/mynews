@@ -17,6 +17,18 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'admin'],function(){
     Route::get('news/create','Admin\NewsController@add');
-    Route::get('profile/add','Admin\ProfileController@add');
-    Route::get('profike/edit','Admin\ProfileController@edit');
+    Route::get('profile/create','Admin\ProfileController@add');
+    Route::get('profile/edit','Admin\ProfileController@edit');
 });
+
+/*
+課題の３↓
+
+「http://XXXXXX.jp/XXX というアクセスが来たときに、
+ AAAControllerのbbbというAction に渡すRoutingの設定」
+を書いてみてください。
+
+Route::get(['XXX','AAAController@bbb']);
+
+
+*/
