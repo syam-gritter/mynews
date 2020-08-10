@@ -1,48 +1,74 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
-    <title>MyProfile</title>
-</head>
-<body>
-    
-      <ul class="navbar-nav ml-auto">
+@extends('layouts/profile')
+@section('title','プロフィール編集')
 
-                        {{-- 以下を追記 --}}
-                        <!-- Authentication Links -->
-                        {{-- ログインしていなかったらログイン画面へのリンクを表示 --}}
-                        @guest
-                            <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                        {{-- ログインしていたらユーザー名とログアウトボタンを表示 --}}
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+@section('content')
 
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                            @endguest
+<div class="container">
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <h2>プロフィール編集</h2>
+                    <form action="{{ action('Admin\ProfileController@update') }}" method="post" enctype="multipart/form-data">
                         
-                        
-                    </ul>
+                        @if (count($errors) > 0)
+                            <ul>
+                                @foreach($errors->all() as $e)
+                                    <li>{{ $e }}</li>
+                                @endforeach    
+                            </ul>
+                        @endif
+                    <div class="form-group row">
+                        <label class="col-md-2">名前</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" name="name" value="{{ $profile_form->name }}"　placeholder="名前">
+                        </div>
+                    </div>
+                    
+                     <div class="form-group row">
+                        <label class="col-md-2">性別</label>
+                        @if( $profile_form->gender === "男")
+                          <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="gender" id="man" value="男" checked="checked">
+                              <label class="form-check-label" for="radio2a">男</label>
+                        　</div>
+                        　<div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="gender" id="woman" value="女">
+                              <label class="form-check-label" for="radio2b">女</label>
+                        　</div>
+                        @elseif( $profile_form->gender === "女")
+                          <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="gender" id="man" value="男" >
+                              <label class="form-check-label" for="radio2a">男</label>
+                        　</div>
+                        　<div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="gender" id="woman" value="女" checked="checked">
+                              <label class="form-check-label" for="radio2b">女</label>
+                        　</div>
+                        @endif
+                   　</div>
+                   　
+                       　<div class="form-group row">
+                            <label class="col-md-2">趣味</label>
+                            <div class="col-md-10">
+                                <textarea class="form-control" name="hobby" >{{ $profile_form->hobby }}</textarea>
+                            </div>
+                        </div>
+                    　
+                    　<div class="form-group row">
+                        <label class="col-md-2">自己紹介欄</label>
+                        <div class="col-md-10">
+                            <textarea class="form-control" name="introduction" rows="20">{{ $profile_form->introduction }}</textarea>
+                        </div>
+                    </div>
+                    
+                    <input type="hidden" name="id" value="{{ $profile_form->id }}">
+                    {{ csrf_field() }}
+                    <div class="form-group row">
+                    <input type="submit" class="btn btn-primary col-md-4" value="送信">
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     
+@endsection   
     
-    <h1>Myプロフィール編集画面</h1>
-    
-    
-</body>
-</html>

@@ -1,23 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
-    <title>MyProfile</title>
-</head>
-<body>
+
     
    @extends('layouts.profile')
    
-   @section('title','Myプロフィール')
+   @section('title','プロフィール')
    
    @section('content')
         <div class="container">
             <div class="row">
                 <div class="col-md-8 mx-auto">
-                    <h2>MY プロフィール</h2>
+                    <h2>プロフィール</h2>
                     <form action="{{ action('Admin\ProfileController@create') }}" method="post" enctype="multipart/form-data">
                         
                         @if (count($errors) > 0)
@@ -30,18 +21,18 @@
                     <div class="form-group row">
                         <label class="col-md-2">名前</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="mame" value="{{ old('title') }}"　placeholder="名前">
+                            <input type="text" class="form-control" name="name" value="{{ old('title') }}"　placeholder="名前">
                         </div>
                     </div>
                     
                      <div class="form-group row">
                         <label class="col-md-2">性別</label>
                           <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="gender" id="man" value="A">
+                              <input class="form-check-input" type="radio" name="gender" id="man" value="男"　>
                               <label class="form-check-label" for="radio2a">男</label>
                         　</div>
                         　<div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="gender" id="woman" value="B">
+                              <input class="form-check-input" type="radio" name="gender" id="woman" value="女">
                               <label class="form-check-label" for="radio2b">女</label>
                         　</div>
                    　</div>
@@ -71,5 +62,3 @@
         </div>
     @endsection
 
-</body>
-</html>
