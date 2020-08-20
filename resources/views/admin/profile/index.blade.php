@@ -47,9 +47,9 @@
                                     <th>{{  $profile->name }}</th>
                                     <td>
                                         @if( $profile->gender === '男')
-                                        　男
+                                        　<h2 class="man">男</h2>
                                         @elseif( $profile->gender === '女')
-                                        　女
+                                        　<h2 class="woman">女</h2>
                                         @endif
                                     </td>
                                     <td>{{ str_limit($profile->hobby,50)}}</td>
